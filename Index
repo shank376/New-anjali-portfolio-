@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anjali Yadav – Aspiring Surgeon</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {
+      font-family:'Poppins',sans-serif;
+      background:#f5f8f8;
+      color:#263238;
+      overflow-x:hidden;
+    }
+
+    :root {
+      --primary:#00bfa5;
+      --secondary:#0097a7;
+      --light:#e0f7fa;
+      --dark:#004d40;
+    }
+
+    /* Navbar */
+    nav {
+      position:fixed; top:0; width:100%;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:1rem 5%; background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(10px);
+      box-shadow:0 2px 10px rgba(0,0,0,0.05);
+      z-index:1000; transition:all .3s;
+    }
+    nav.scrolled {box-shadow:0 4px 30px rgba(0,0,0,0.1);}
+    .logo {font-weight:700; font-size:1.4rem; color:var(--primary);}
+    .nav-links {display:flex; gap:2rem;}
+    .nav-links a {
+      text-decoration:none; color:#333; font-weight:500;
+      position:relative; transition:.3s;
+    }
+    .nav-links a::after {
+      content:''; position:absolute; bottom:-4px; left:0;
+      width:0; height:2px; background:var(--primary); transition:.3s;
+    }
+    .nav-links a:hover {color:var(--primary);}
+    .nav-links a:hover::after {width:100%;}
+
+    /* Hero */
+    .hero {
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      text-align:center; padding:7rem 5% 2rem;
+      background:linear-gradient(135deg,#e0f7fa,#b2ebf2);
+      position:relative; overflow:hidden;
+    }
+    .hero h1 {font-size:3rem; color:var(--dark);}
+    .hero h1 span {background:linear-gradient(135deg,var(--primary),var(--secondary));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
+    .hero p {max-width:700px; margin:1.5rem auto; line-height:1.8; color:#37474f;}
+    .btn {
+      padding:0.9rem 2rem; border-radius:50px; border:none;
+      font-weight:600; cursor:pointer; transition:all .3s;
+    }
+    .btn-primary {
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      color:#fff; box-shadow:0 5px 20px rgba(0,191,165,0.3);
+    }
+    .btn-primary:hover {transform:translateY(-3px);}
+
+    /* About */
+    #about {background:#fff; padding:6rem 5%;}
+    .about-container {
+      display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;
+      max-width:1200px; margin:auto;
+    }
+    .about-img img {
+      width:100%; border-radius:20px; box-shadow:0 10px 40px rgba(0,0,0,0.1);
+      transition:transform .5s;
+    }
+    .about-img img:hover {transform:scale(1.03);}
+    .about-content h2 {font-size:2rem; color:var(--dark);}
+    .about-content p {margin-top:1rem; line-height:1.8; color:#37474f;}
+    .quote {
+      background:linear-gradient(135deg,var(--light),#b2ebf2);
+      padding:1.5rem; border-left:5px solid var(--primary);
+      margin-top:1.5rem; border-radius:10px; font-style:italic;
+    }
+    .focus-card {
+      margin-top:2rem; padding:1.5rem 2rem;
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      color:#fff; border-radius:15px; box-shadow:0 5px 20px rgba(0,191,165,0.3);
+      text-align:center;
+      animation:fadeInUp 1s ease forwards;
+    }
+
+    /* Achievements */
+    #achievements {padding:6rem 5%; background:#fff;}
+    .section-title {
+      text-align:center; font-size:2.5rem; color:var(--dark); margin-bottom:3rem;
+      position:relative;
+    }
+    .section-title::after {
+      content:''; width:80px; height:4px;
+      background:linear-gradient(90deg,var(--primary),var(--secondary));
+      position:absolute; left:50%; transform:translateX(-50%); bottom:-10px; border-radius:2px;
+    }
+    .achievements-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem;
+      max-width:1200px; margin:auto;
+    }
+    .achievement-card {
+      background:#fff; border-left:5px solid var(--primary);
+      border-radius:15px; padding:2rem; box-shadow:0 10px 30px rgba(0,0,0,0.08);
+      transition:.4s; opacity:0; transform:translateY(30px);
+    }
+    .achievement-card:hover {transform:translateY(-5px);}
+    .achievement-card.active {opacity:1; transform:translateY(0);}
+    .achievement-card h3 {color:var(--dark); margin-bottom:1rem;}
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {opacity:0; transform:translateY(30px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
+    /* Contact */
+    #contact {padding:6rem 5%; background:linear-gradient(135deg,var(--dark),#00695c); color:#fff;}
+    #contact h2 {text-align:center; font-size:2.3rem;}
+    .contact-grid {display:flex; flex-wrap:wrap; gap:2rem; justify-content:center; margin-top:3rem;}
+    .contact-card {
+      background:rgba(255,255,255,0.1); padding:2rem; border-radius:15px;
+      text-align:center; width:250px; transition:.3s;
+    }
+    .contact-card:hover {background:rgba(255,255,255,0.15);}
+    .contact-card h3 {margin:1rem 0 0.5rem;}
+
+    footer {text-align:center; padding:2rem; background:#263238; color:#ccc; font-size:0.9rem;}
+
+    /* Responsive */
+    @media(max-width:900px){
+      .about-container{grid-template-columns:1fr;}
+      .hero h1{font-size:2.4rem;}
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="logo">⚕️ Anjali Yadav</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div>
+      <h1>Hello, I'm <span>Anjali Yadav</span></h1>
+      <p>An aspiring surgeon passionate about medical innovation, compassionate healthcare, and scientific excellence. My dream is to blend empathy with advanced research to create a healthier tomorrow.</p>
+      <button class="btn btn-primary" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Connect With Me</button>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about-container">
+      <div class="about-img">
+        <img src="https://cdn-icons-png.flaticon.com/512/4322/4322997.png" alt="Anjali Yadav">
+      </div>
+      <div class="about-content">
+        <h2>About Me</h2>
+        <p>I am a dedicated student of science from JNV Chandauli with a growing passion for biology, human anatomy, and healthcare. My ambition to become a surgeon stems from the desire to heal lives through precision and compassion. My visits to CSIR-CDRI Lucknow and IIT BHU inspired me to see medicine not only as treatment but as innovation.</p>
+        <div class="quote">“Wherever the art of medicine is loved, there is also a love of humanity.” — Hippocrates</div>
+        <div class="focus-card">
+          <h3>⚕️ Future Surgeon | Medical Innovator</h3>
+          <p>Focused on medical research, public health, and the fusion of science with empathy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="achievements">
+    <h2 class="section-title">Achievements & Activities</h2>
+    <div class="achievements-grid">
+      <div class="achievement-card"><h3>🏅 Regional Kabaddi Champion</h3><p>Represented JNV Chandauli regionally, learning teamwork and endurance.</p></div>
+      <div class="achievement-card"><h3>🎓 Oracle AI Certification</h3><p>Earned Oracle AI Foundations certification 2025, linking technology with healthcare innovation.</p></div>
+      <div class="achievement-card"><h3>🔬 Institutional Visits</h3><p>Explored CSIR-CDRI and IIT BHU labs, gaining early exposure to research and science culture.</p></div>
+      <div class="achievement-card"><h3>💡 Science Exhibition Presenter</h3><p>Presented medical-themed models on anatomy and blood circulation, earning distinction for clarity.</p></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-grid">
+      <div class="contact-card"><h3>📧 Email</h3><p>anjaliyadav6379@gmail.com</p></div>
+      <div class="contact-card"><h3>📍 Location</h3><p>Chandauli, India</p></div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Anjali Yadav | Aspiring Surgeon – Built with care and precision.
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll',()=>{
+      const nav=document.getElementById('navbar');
+      nav.classList.toggle('scrolled',window.scrollY>80);
+    });
+
+    // Scroll reveal
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){e.target.classList.add('active');}
+      });
+    },{threshold:0.2});
+    document.querySelectorAll('.achievement-card').forEach(el=>observer.observe(el));
+  </script>
+</body>
+</html>
